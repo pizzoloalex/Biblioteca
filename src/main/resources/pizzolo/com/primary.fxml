@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="530.0" prefWidth="637.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizzolo.com.PrimaryController">
+    <children>
+        <TextField fx:id="isbnTextArea" promptText="codice ISBN"/>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+            <children>
+                <ComboBox fx:id="comboScaffali" onAction="#gestionePiano" prefWidth="150.0" promptText="Scaffali"/>
+                <ComboBox fx:id="comboPiani" prefWidth="150.0" promptText="Piani"/>
+            </children>
+        </HBox>
+        <Button fx:id="primaryButton" onAction="#assegna" text="assegna posizione al libro"/>
+        <Label fx:id="errorLabel"/>
+        <TextArea fx:id="infoTextArea" editable="false" prefHeight="200.0" prefWidth="200.0"/>
+        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#ordinaISBN" text="Ordina ISBN"/>
+                <Button mnemonicParsing="false" onAction="#ordinTitolo" text="Ordina titolo"/>
+                <Button mnemonicParsing="false" onAction="#ordinaPosizione" text="Ordina posizione"/>
+            </children>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+</VBox>
