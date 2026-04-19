@@ -72,7 +72,7 @@ public class PrimaryController {
     public void assegna() {
         if (comboScaffali.getValue() == null) {
             errorLabel.setText("Scegli uno scaffale");
-            return
+            return;
         } else if (comboPiani.getValue() == null) {
             errorLabel.setText("Scegli il numero del piano");
             return;
@@ -80,12 +80,20 @@ public class PrimaryController {
             errorLabel.setText("");
         }
         for (Libro lb : biblioteca.getLibri()) {
+            //controlla i libri scritti nella text area  cosi non riscriverli due  volte
+            if (lb.getCodiceISBN().equals(isbnTextArea.getText())) {
+                if (lb.getScaffale() != null) {
+                    errorLabel.setText("Libro gia assegnato allo scaffale " + lb.getScaffale().getCodice() +
+                            "piano " + lb.getNumPiani());
+                    return;
+                }
+            }
             if (comboScaffali.getValue().equals(lb.getScaffale()) && comboPiani.getValue().equals(lb.getNumPiani())) {
                 errorLabel.setText("Posizione occupata - scegli un altra posizione");
                 return;
             }
             if (lb.getCodiceISBN().equals(isbnTextArea.getText())) {
-                if (!copia.contains(lb)){
+                if (!copia.contains(lb)) {
                     copia.add(lb);
                 }
                 lb.setNumPiani(comboPiani.getValue());
@@ -104,7 +112,7 @@ public class PrimaryController {
         Collections.sort(copia);
         String s = "";
         for (Libro lb : copia) {
-            s += infoTextArea.getText() + lb.toString() + "\n";
+            s += lb.toString() + "\n";
         }
         infoTextArea.setText(s);
     }
@@ -114,7 +122,7 @@ public class PrimaryController {
         Collections.sort(copia, new OrdinamentoTitolo());
         String s = "";
         for (Libro lb : copia) {
-            s += infoTextArea.getText() + lb.toString() + "\n";
+            s += lb.toString() + "\n";
         }
         infoTextArea.setText(s);
     }
@@ -124,7 +132,7 @@ public class PrimaryController {
         Collections.sort(copia, new OrdinamentoPosizione());
         String s = "";
         for (Libro lb : copia) {
-            s += infoTextArea.getText() + lb.toString() + "\n";
+            s += lb.toString() + "\n";
         }
         infoTextArea.setText(s);
     }
