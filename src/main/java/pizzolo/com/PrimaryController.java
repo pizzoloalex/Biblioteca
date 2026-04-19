@@ -72,18 +72,22 @@ public class PrimaryController {
     public void assegna() {
         if (comboScaffali.getValue() == null) {
             errorLabel.setText("Scegli uno scaffale");
+            return
         } else if (comboPiani.getValue() == null) {
             errorLabel.setText("Scegli il numero del piano");
+            return;
         } else {
             errorLabel.setText("");
         }
         for (Libro lb : biblioteca.getLibri()) {
-            if (comboPiani.getValue() == lb.getNumPiani()) {
+            if (comboScaffali.getValue().equals(lb.getScaffale()) && comboPiani.getValue().equals(lb.getNumPiani())) {
                 errorLabel.setText("Posizione occupata - scegli un altra posizione");
                 return;
             }
             if (lb.getCodiceISBN().equals(isbnTextArea.getText())) {
-                copia.add(lb);
+                if (!copia.contains(lb)){
+                    copia.add(lb);
+                }
                 lb.setNumPiani(comboPiani.getValue());
                 lb.setScaffale(comboScaffali.getValue());
                 String s = infoTextArea.getText() + lb.toString() + "\n";
